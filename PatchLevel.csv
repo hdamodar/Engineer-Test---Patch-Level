@@ -1,6 +1,0 @@
-
-
-Instance Id,AMI ID,Platform,Patch Date,Patch Level in days,compliance status
-i-0d5e584c2b03d4979,ami-002404fbf5fb682ff,windows,2020-05-01,40,non-compliant
-i-0d003f7d1ad555519,ami-002404fbf5fb682ff,windows,2020-06-01,9,compliant
-i-00f65bf5ffef066d7,ami-002404fbf5fb682ff,windows,,,Version tag does not exist
