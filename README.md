@@ -35,8 +35,23 @@ Before running the script you should set up your AWS security credentials to con
 
 Replace <Your Access Key ID> and <Your Secret Access Key> with your credentials in aws.config file.
 
+## Cloning the repository using the command line
+
+1. Under the repository name, click Clone or download and in the “Clone with HTTPs” section, copy the URL for your repository.
+
+2. Next, on your local machine, open your bash shell and change your current working directory to the location where you would like to clone your repository.
+
+4. Once you have navigated to the directory where you want to put your repository, you can use:
+
+git clone https://github.com/hdamodar/Patch-Level.git
+
+3. The git clone command copies the repository from GitHub to your local computer
+
 ## Running Python script
+
 This script connects to your aws EC2 service , gets the list of instnces with instance ID, Image Id, Platform, patchdate, patchlevel_days and compliance_state. All you need to do is run the code:
+
+To run the script Browse to the path where the repository is copied and run the code:
 
 python patchlevel.py
 
