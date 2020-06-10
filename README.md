@@ -40,4 +40,4 @@ This script connects to your aws EC2 service , gets the list of instnces with in
 
 python patchlevel.py
 
-## Note: ou need to make sure the credentials you're using have the correct permissions to access the Amazon EC2 service.
+## Note: You need to make sure the credentials you're using have the correct permissions to access the Amazon EC2 service.
