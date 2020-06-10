@@ -10,7 +10,7 @@ compliant - patch level less than 30 days
 
 non-compliant - patch level less than 30 days
 
-Blank - Tag Name 'Version' does not exist
+blank - Tag Name 'Version' does not exist
 
 ## How the script works
 
