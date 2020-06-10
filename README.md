@@ -5,8 +5,11 @@
 This repository contains the python script to get the list of instances with patch date and patch level compliance status and output to a csv file. Any instance patch date older than 30 days is considered non compliant.
 
 Compliant Status:
+
 compliant - patch level less than 30 days
+
 non-compliant - patch level less than 30 days
+
 Blank - Tag Name 'Version' does not exist
 
 ## How the script works
