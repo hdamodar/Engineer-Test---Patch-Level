@@ -14,7 +14,7 @@ blank - Tag Name 'Version' does not exist
 
 ## How the script works
 
-- This script connects to your aws EC2 service , gets the list of EC2 instances with and checks for the tag name 'Version' for each instance.
+- This script connects to your aws EC2 service , gets the list of EC2 instances and checks for the tag name 'Version' for each instance.
 - If tag name 'Version' exists gets the tag value "<AMI ID, config level, patch level.> e.g.
   ami-1234a567bc89d1234;20200527;20200601.
 - Using Python slice() gets the Patch Level from the tag Value  and this is converted to date format.
@@ -29,7 +29,7 @@ Run the following command  to install the latest Boto3 release via pip:
 
 pip install boto3
 
-## Bsic Configuration:
+## Basic Configuration:
 
 Before running the script you should set up your AWS security credentials to connect to AWS
 
