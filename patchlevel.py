@@ -5,17 +5,7 @@ import datetime
 
 X = slice(-8, 50)
 
-# set the aws access credentials
-conf = yaml.load(open('conf/aws.config'))
-config_aws_access_key_id = conf['aws']['access_key_id']
-config_aws_secret_access_key = conf['aws']['secret_access_key']
-config_region_name = conf['aws']['region_name']
-
-
-client=boto3.client('ec2',
-        aws_access_key_id=config_aws_access_key_id,
-        aws_secret_access_key=config_aws_secret_access_key,
-        region_name=config_region_name)
+client=boto3.client('ec2', region_name='ap-southeast-2')
 
 paginator = client.get_paginator('describe_instances')
 response_iterator = paginator.paginate()
@@ -58,6 +48,7 @@ for iterator in response_iterator:
                 patchdate = ""
                 patchlevel_days = ""
                 compliance_state = "Version tag does not exist"
+            print(InstanceId, ImageId, Platform, patchdate, patchlevel_days, compliance_state)
             with open('PatchLevel.csv', 'a', newline='') as file:
                 writer = csv.writer(file)
                 writer.writerow([InstanceId, ImageId, Platform, patchdate, patchlevel_days, compliance_state])

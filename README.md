@@ -15,25 +15,31 @@ blank - Tag Name 'Version' does not exist
 ## How the script works
 
 - This script connects to your aws EC2 service , gets the list of EC2 instances and checks for the tag name 'Version' for each instance.
+
 - If tag name 'Version' exists gets the tag value "<AMI ID, config level, patch level.> e.g.
   ami-1234a567bc89d1234;20200527;20200601.
+
 - Using Python slice() gets the Patch Level from the tag Value  and this is converted to date format.
+
 - Checks the difference between  Patch Level date and Current date and converted to days.
+
 - If the number of days is greater than 30 days, the instance is considered not compliant.
+
 - The output of the script is then send to csv file that is saved to your current working directory.
 
 ## Requirement to run the python script
 
-This script depends on boto3, the AWS SDK for Python, and requires Python.
-Run the following command  to install the latest Boto3 release via pip:
+- Configure the settings that the  AWS Command Line Interface (AWS CLI) uses to interact with AWS. Run following command:
 
-pip install boto3
+  aws configure
 
-## Basic Configuration:
+ When prompted enter your access key, secret access key, AWSW region and the output format
 
-Before running the script you should set up your AWS security credentials to connect to AWS
 
-Replace <Your Access Key ID> and <Your Secret Access Key> with your credentials in aws.config file.
+- This script depends on boto3, the AWS SDK for Python, and requires Python.
+  Run the following command  to install the latest Boto3 release via pip:
+
+  pip install boto3
 
 ## Cloning the repository using the command line
 
@@ -43,7 +49,7 @@ Replace <Your Access Key ID> and <Your Secret Access Key> with your credentials 
 
 4. Once you have navigated to the directory where you want to put your repository, you can use:
 
-git clone https://github.com/hdamodar/Patch-Level.git
+   git clone https://github.com/hdamodar/Patch-Level.git
 
 3. The git clone command copies the repository from GitHub to your local computer
 
