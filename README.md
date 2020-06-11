@@ -1,4 +1,4 @@
-#Script to list EC2 instances Patch Level
+## Script to list EC2 instances Patch Level
 
 ## Description
 
@@ -6,11 +6,11 @@ This repository contains the python script to get the list of instances with pat
 
 Compliant Status:
 
-compliant - patch level less than 30 days
+- compliant - patch level less than 30 days
 
-non-compliant - patch level less than 30 days
+- non-compliant - patch level less than 30 days
 
-blank - Tag Name 'Version' does not exist
+- blank - Tag Name 'Version' does not exist
 
 ## How the script works
 
