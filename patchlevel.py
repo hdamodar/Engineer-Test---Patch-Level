@@ -1,6 +1,5 @@
 import boto3
 import csv
-import yaml
 import datetime
 
 X = slice(-8, 50)
