@@ -33,7 +33,7 @@ Compliant Status:
 
   aws configure
 
- When prompted enter your access key, secret access key, AWSW region and the output format
+  When prompted enter your access key, secret access key, AWSW region and the output format
 
 
 - This script depends on boto3, the AWS SDK for Python, and requires Python.
