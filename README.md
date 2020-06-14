@@ -2,15 +2,9 @@
 
 ## Description
 
-This repository contains the python script to get the list of instances with patch date and patch level compliance status and output to a csv file. Any instance patch date older than 30 days is considered non compliant.
+This repository contains the python script to get the list of instances with patch date and number of days patch date is older. Any instance patch date older than 30 days is considered non compliant.
 
-Compliant Status:
-
-- compliant - patch level less than 30 days
-
-- non-compliant - patch level less than 30 days
-
-- blank - Tag Name 'Version' does not exist
+This script gets the list of instances in which patch date is older than 30days.
 
 ## How the script works
 
@@ -25,7 +19,6 @@ Compliant Status:
 
 - If the number of days is greater than 30 days, the instance is considered not compliant.
 
-- The output of the script is then send to csv file that is saved to your current working directory.
 
 ## Requirement to run the python script
 
@@ -55,7 +48,7 @@ Compliant Status:
 
 ## Running Python script
 
-This script connects to your aws EC2 service , gets the list of instnces with instance ID, Image Id, Platform, patchdate, patchlevel_days and compliance_state. All you need to do is run the code:
+This script connects to your aws EC2 service , gets the list of instances with instance ID, Image Id, Platform, patchdate, patchlevel_day. All you need to do is run the code:
 
 To run the script Browse to the path where the repository is copied and run the code:
 
