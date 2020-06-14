@@ -1,54 +1,31 @@
 import boto3
 import csv
 import datetime
+from datetime import date
+import pandas as pd
 
-X = slice(-8, 50)
-
-client=boto3.client('ec2', region_name='ap-southeast-2')
-
-paginator = client.get_paginator('describe_instances')
-response_iterator = paginator.paginate()
-with open('PatchLevel.csv', 'a', newline='') as file:
-    writer = csv.writer(file)
-    writer.writerow(['Instance Id', 'AMI ID', 'Platform', 'Patch Date', 'Patch Level in days', 'compliance status'])
-#file.close()
-for iterator in response_iterator:
-    for resp in iterator['Reservations']:
+instances = [i for i in boto3.resource('ec2', region_name='ap-southeast-2').instances.all()]
+def get_ec2_patch_level(response):
+    Instance_ID, Image_ID, Patch_Date, Patch_Level = [], [], [], []
+    for i in instances:
         VersionTag = "Version tag not found"
-        AccountId = resp['OwnerId']
-        for inst in resp['Instances']:
-            ImageId=inst['ImageId']
-            Platform=inst['Platform']
-            InstanceId=inst['InstanceId']
-            ec2Instance = inst['InstanceId']
-            tags = {}
-            for tag in inst['Tags']:
-                tags[tag['Key']] = tag['Value']
-            if tag["Key"] == 'Version':
-                VersionTag = tag["Value"]
-                VersionTag = VersionTag[X]
-                patchdate = datetime.datetime.strptime(str(VersionTag), '%Y%m%d').date()
-                #print(patchdate)
-                datetimenow = datetime.datetime.now()
-                date_time_obj = datetime.datetime.strptime(str(datetimenow), '%Y-%m-%d %H:%M:%S.%f')
-                todaydate = date_time_obj.date()
-                date_diff = (date_time_obj.date() - patchdate)
-                patchlevel_days = date_diff.days
-                if patchlevel_days > 30:
-                    compliance_comment = 'Patch level is older than 30 days'
-                    compliance_state = 'non-compliant'
-                    #print(compliance_comment)
-                else:
-                    compliance_state = 'compliant'
-                #print(ImageId,Platform,patchdate,InstanceId)
-                #print(patchlevel_days)
-            else:
-                #print("this is not tagged with tag Version")
-                patchdate = ""
-                patchlevel_days = ""
-                compliance_state = "Version tag does not exist"
-            print(InstanceId, ImageId, Platform, patchdate, patchlevel_days, compliance_state)
-            with open('PatchLevel.csv', 'a', newline='') as file:
-                writer = csv.writer(file)
-                writer.writerow([InstanceId, ImageId, Platform, patchdate, patchlevel_days, compliance_state])
-                file.close()
+        for t in i.tags:
+            if (t["Key"] == 'Version'):
+                VersionTag = t["Value"]
+                patchdate = datetime.datetime.strptime(str(VersionTag)[slice(-8, 50)], '%Y%m%d').date()
+                todaydate = (datetime.datetime.strptime(str(datetime.datetime.now()), '%Y-%m-%d %H:%M:%S.%f')).date()
+                patch_level_diff = (todaydate - patchdate).days
+                if patch_level_diff > 30:
+                    Instance_ID.append(i.instance_id)
+                    Image_ID.append(i.image_id)
+                    Patch_Date.append(patchdate)
+                    Patch_Level.append(patch_level_diff)
+    return pd.DataFrame({
+    'InstanceId': Instance_ID,
+    'ImageID': Image_ID,
+    'Patchdate': Patch_Date,
+    'Patch_Level_Diff(days)': Patch_Level
+    })
+
+instances_Patch_Level_List = get_ec2_patch_level(instances)
+print(instances_Patch_Level_List)
